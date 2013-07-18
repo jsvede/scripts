@@ -1,0 +1,14 @@
+#/bin/bash
+
+if [ $# -ne 2 ]
+then
+   echo Usage: addalias alias values
+	example: addalias ll "ls -la"
+   exit
+fi
+
+echo "$1='$2'"
+
+cat "alias $1='$2'" >> "$HOME/.aliases"
+
+. $HOME/.aliases

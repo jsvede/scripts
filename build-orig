@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# A script to run my build. 
+#
+# The real purpose is to copy my ovation-dev.properties from my
+# local cache to my main working dir (regardless of branch) and then
+# reset the file back to the state from the repo. The goal is to 
+# avoid an inadvertant checking of the properties file.
+#
+#
+
+origDir=$(pwd)
+
+cd ~/workspace/ws-main
+
+cp ~/dev/files/ovation-dev.properties ./ovation/external/.
+
+mvn clean install -DskipTests
+
+
+echo "#######################################################################"
+echo "#                                                                     #"
+echo "#  REMEMBER: ovation-dev.properties was copied from ~/dev/files       #"
+echo "#            you may see problems if ovation-dev.properties           #"
+echo "#                                                                     #"
+echo "#                                                                     #"
+echo "# reseting ovation-dev.properties back to state from git               #"
+echo "#                                                                     #"
+echo "#######################################################################"
+
+git checkout ovation/external/ovation-dev.properties
+
+cd $origDir
+
