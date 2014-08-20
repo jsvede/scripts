@@ -3,7 +3,10 @@
 # A script to pretty print the XML in the headend
 # files
 
-cd localized-hierarchy-defs
+if [ -d localized-hierarchy-defs ]
+then
+    cd localized-hierarchy-defs
+fi
 
 whereAreWe=$(pwd)
 
@@ -26,7 +29,7 @@ do
 		do
 			mv "$xmlFile" "$xmlFile".tmp
 			xmllint --format "$xmlFile".tmp > $xmlFile
-			rm -rf "$XmlFile".tmp
+			rm -rf "$xmlFile".tmp
 		done
 
 		cd ..
